@@ -1,0 +1,15 @@
+form.reusableform {
+    height: 250px;
+    width: 200px;
+    background-color: red;
+}
+
+form.reusableform > div.formbuttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    right: 0px;
+    bottom: 0px;
+}
