@@ -1,0 +1,17 @@
+label {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+p.inputdescription {
+    font-size: 12px;
+}
+
+p.errormessage {
+    font-size: 12px;
+    color: red;
+}
+
+div.textinput, div.selectinput, div.textareainput {
+    padding: 5px 0px;
+}

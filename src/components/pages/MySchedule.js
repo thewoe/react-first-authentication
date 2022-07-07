@@ -1,6 +1,5 @@
 import Form from "../ui/form/Form";
 import FormInput from "../ui/form/FormInput";
-import FormOption from "../ui/form/FormOption";
 import FormSelect from "../ui/form/FormSelect";
 import FormTextArea from "../ui/form/FormTextArea";
 
@@ -9,8 +8,8 @@ function MySchedule() {
     // Hooks ---------------------------------------
     // Context -------------------------------------
     // Methods -------------------------------------
-    const onSubmit = () => console.log(1);
-    const onCancel = () => console.log(2);
+    const onSubmit = () => alert("Submit Button Clicked");
+    const onCancel = () => alert("Cancel Button Clicked");
     // View ----------------------------------------
     return (
         <>

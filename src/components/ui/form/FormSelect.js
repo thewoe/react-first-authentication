@@ -1,8 +1,13 @@
-function FormSelect({id, name, label, description, errormessage, selectoptions}) {
+import './FormInput.css';
+
+function FormSelect({id, name, label, description=null, errormessage=null, selectoptions=null}) {
     return (
         <div className='selectinput'>
             <label htmlFor={id}>{label}</label>
-            <p className='inputdescription'>{description}</p>
+            {
+                description &&
+                    <p className='inputdescription'>{description}</p>
+            }
             <select id={id} name={name}>
                 {selectoptions.map(selectoption => {
                     return (
@@ -15,7 +20,10 @@ function FormSelect({id, name, label, description, errormessage, selectoptions})
                     );
                 })}
             </select>
-            <p className='errormessage'>{errormessage}</p>
+            {
+                errormessage &&
+                    <p className='errormessage'>{errormessage}</p>
+            }
         </div>
     );
 }

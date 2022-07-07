@@ -1,11 +1,19 @@
-function FormTextArea({id, name, label, description, errormessage, placeholder}) {
+import './FormInput.css';
+
+function FormTextArea({id, name, label, description=null, errormessage=null, placeholder=null}) {
     return (
         <div className='textareainput'>
             <label htmlFor={id}>{label}</label>
-            <p className='inputdescription'>{description}</p>
+            {
+                description &&
+                    <p className='inputdescription'>{description}</p>
+            }
             <textarea id={id} name={name} placeholder={placeholder}>
             </textarea>
-            <p className='errormessage'>{errormessage}</p>
+            {
+                errormessage &&
+                    <p className='errormessage'>{errormessage}</p>
+            }
         </div>
     );
 }

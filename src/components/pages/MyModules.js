@@ -5,10 +5,12 @@ import ModuleList from "../ui/module/ModuleList";
 import ButtonBar from "../ui/button/ButtonBar";
 import ButtonShowAll from "../ui/button/ButtonShowAll";
 import ButtonShowFavorites from "../ui/button/ButtonShowFavorites";
+import ButtonAddModule from "../ui/button/ButtonAddModule";
 import ButtonNo from "../ui/button/ButtonNo";
 import ButtonYes from "../ui/button/ButtonYes";
 import ToolTip from '../ui/tooltip/ToolTip';
 import Modal from "../ui/modal/Modal";
+import ModuleForm from "../ui/module/ModuleForm";
 
 import './MyModules.css';
 
@@ -40,6 +42,22 @@ function MyModules() {
 
     const handleShowFavorites = () => setModules(modules.filter((module) => module.isFavorite));
 
+    const onSubmit = (newModule) => {
+        newModule.ModuleID = modules.length+1;
+        setModules([...modules, newModule]);
+        handleCancel();
+    }
+
+    const onEdit = (editedModule) => {
+        setModules([...modules, editedModule]);
+        handleCancel();
+    }
+
+    const handleAdd = () => {
+        initialiseAddModal();
+        setModalVisibility(true);
+    }
+
     const handleFavorite = moduleId => setModules(
         modules.map((module) => (
             module.ModuleID === moduleId ? { ...module, isFavorite: true } : module
@@ -54,7 +72,7 @@ function MyModules() {
 
     const handleDelete = id => {
         setModules(modules.filter((module) => module.ModuleID !== id));
-        handleSetModalVisibilityFalse();
+        handleCancel();
     };
 
     const handleDeleteRequest = id => {
@@ -62,9 +80,12 @@ function MyModules() {
         setModalVisibility(true);
     };
 
-    const handleEdit = moduleId => console.log(moduleId + " requires modification");
+    const handleEdit = () => {
+        initialiseEditModal();
+        setModalVisibility(true);
+    }
 
-    const handleSetModalVisibilityFalse = () => setModalVisibility(false);
+    const handleCancel = () => setModalVisibility(false);
 
     const createModal = (title, description, buttons) => {
         setModalTitle(title);
@@ -75,16 +96,32 @@ function MyModules() {
     const initialiseDeleteModal = id => {
         const selectedModule = modules.find((module) => module.ModuleID === id);
         createModal(
-            "Confirm Module Deletion", 
+            'Confirm Module Deletion', 
             `Do you want to delete module '${selectedModule.ModuleCode} (${selectedModule.ModuleName})'?`,
             [
-                <ToolTip text="Click to delete module">
+                <ToolTip text='Click to delete module'>
                     <ButtonYes hasTitle onClick={() => handleDelete(id)} />
                 </ToolTip>,
-                <ToolTip text="Click to retain module">
-                    <ButtonNo hasTitle onClick={handleSetModalVisibilityFalse} />
+                <ToolTip text='Click to retain module'>
+                    <ButtonNo hasTitle onClick={handleCancel} />
                 </ToolTip>
             ]
+        );
+    };
+
+    const initialiseAddModal = () => {
+        createModal(
+            'Add New Module',
+            <ModuleForm onCancel={handleCancel} onSubmit={onSubmit} />,
+            []
+        );
+    };
+
+    const initialiseEditModal = () => {
+        createModal(
+            'Edit Module',
+            <ModuleForm onCancel={handleCancel} onSubmit={onEdit} />,
+            []
         );
     };
     
@@ -99,6 +136,9 @@ function MyModules() {
                     </ToolTip>
                     <ToolTip text='Show favourite modules'>
                         <ButtonShowFavorites hasTitle onClick={handleShowFavorites} />
+                    </ToolTip>
+                    <ToolTip text='Add module'>
+                        <ButtonAddModule hasTitle onClick={handleAdd} />
                     </ToolTip>
                 </ButtonBar>
             </div>

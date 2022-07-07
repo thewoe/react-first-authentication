@@ -2,9 +2,11 @@ import ButtonBar from '../button/ButtonBar';
 import ButtonCancel from '../button/ButtonCancel';
 import ButtonSubmit from '../button/ButtonSubmit';
 
+import './Form.css';
+
 function Form({children, onCancel, onSubmit}) {
     return (
-        <form className='reusableform' onSubmit={onSubmit}>
+        <form className='reusableform'>
             <div className='formcontents'>
                 {children}
             </div>
