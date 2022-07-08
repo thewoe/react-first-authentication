@@ -2,35 +2,34 @@ header {
   color: White;
   background: #3c1557;
   display: flex;
-}
 
-header > a {
-  text-decoration: none;
-}
+  & > a {
+    text-decoration: none;
 
-header > a > img {
-  filter: invert(1);
-  margin-left: 10px;
-}
+    & > img {
+      filter: invert(1);
+      margin-left: 10px;
+    }
 
-header > a > h1 {
-  color: White;
-  margin-left: 10px;
-  font-size: 200%;
-}
+    & > h1 {
+      color: White;
+      margin-left: 10px;
+      font-size: 200%;
+    }
+  
+    & :hover, :active {
+      color: #aa63da;
+    }
+  }
 
-header > a:hover,
-header > a:active {
-  color: #aa63da;
-}
-
-header > div.login {
-  flex: 1;
-  margin-right: 0.5rem;
-  text-align: right;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  & > div.login {
+    flex: 1;
+    margin-right: 0.5rem;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
 }
 
 @media screen and (max-width: 500px) {

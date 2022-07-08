@@ -14,41 +14,41 @@ main.modalpane {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
   
-main.modalpane header {
-  width: 100%;
-  height: 50px;
-  padding: 10px 50px;
-  color: White;
-  font-size: 100%;
-  border-radius: 5px 5px 0 0;;
-  background-color: #edafb8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  & header {
+    width: 100%;
+    height: 50px;
+    padding: 10px 50px;
+    color: White;
+    font-size: 100%;
+    border-radius: 5px 5px 0 0;;
+    background-color: #edafb8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-main.modalpane main.modaldescription {
-  width: 100%;
-  padding: 10px;
-  color: Black;
-  font-size: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  & main.modaldescription {
+    width: 100%;
+    padding: 10px;
+    color: Black;
+    font-size: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-main.modalpane main.modaldescription > p {
-  text-align: center;
-}
+    & > p {
+      text-align: center;
+    }
+  }
 
-main.modalpane div.modalbuttons {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px;
-  position: relative;
-  right: 0px;
-  bottom: 0px;
+  & div.modalbuttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    right: 0px;
+    bottom: 0px;
+  }
 }
