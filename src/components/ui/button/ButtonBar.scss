@@ -1,3 +1,6 @@
+@import "../../../variables";
+@import "../../../mixins";
+
 div.buttonbar {
     display: flex;
     flex-direction: row;

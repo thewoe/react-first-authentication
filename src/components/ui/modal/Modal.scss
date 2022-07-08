@@ -1,7 +1,10 @@
+@import "../../../variables";
+@import "../../../mixins";
+
 div.modaloverlay {
   width: 100vw;
   height: 100%;
-  background-color: rgba(60,60,60,0.7);
+  background-color: $modalOverlayColour;
   z-index: 2;
   top: 50%;
   left: 50%;
@@ -19,10 +22,10 @@ main.modalpane {
     width: 100%;
     height: 50px;
     padding: 10px 50px;
-    color: White;
+    color: $subheaderTextColour;
     font-size: 100%;
     border-radius: 5px 5px 0 0;;
-    background-color: #edafb8;
+    background-color: $subheaderBackgroundColour;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +34,7 @@ main.modalpane {
   & main.modaldescription {
     width: 100%;
     padding: 10px;
-    color: Black;
+    color: $standardTextColour;
     font-size: 100%;
     display: flex;
     align-items: center;

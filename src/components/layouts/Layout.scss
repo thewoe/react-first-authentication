@@ -1,11 +1,14 @@
+@import "../../variables";
+@import "../../mixins";
+
 div#root {
-  background: White;
+  background: $pageBackgroundColour;
   min-height: 100vh;
   display: flex;
   justify-content: center;
 
   & > div.centrepane {
-    background: WhiteSmoke;
+    background: $pageCentrepaneBackgroundColour;
     width: 100%;
     max-width: 1000px;
     display: grid;

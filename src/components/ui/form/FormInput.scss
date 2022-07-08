@@ -1,3 +1,6 @@
+@import "../../../variables";
+@import "../../../mixins";
+
 label {
     font-size: 15px;
     font-weight: 500;
@@ -9,7 +12,7 @@ p.inputdescription {
 
 p.errormessage {
     font-size: 12px;
-    color: red;
+    color: $errorMessageTextColour;
 }
 
 div.textinput, div.selectinput, div.textareainput {

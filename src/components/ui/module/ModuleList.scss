@@ -1,3 +1,6 @@
+@import "../../../variables";
+@import "../../../mixins";
+
 div.list {
   display: flex;
   flex-direction: row;

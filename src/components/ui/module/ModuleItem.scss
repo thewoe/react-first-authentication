@@ -1,3 +1,6 @@
+@import "../../../variables";
+@import "../../../mixins";
+
 * {
   margin: 0px;
   padding: 0px;
@@ -32,7 +35,7 @@
 
     & > h3 {
       font-size: 14px;
-      color: #909090;
+      color: $subsubheaderTextColour;
     }
   }
 
@@ -40,15 +43,14 @@
     & button {
       font: inherit;
       cursor: pointer;
-      color: #77002e;
-      border: 1px solid #77002e;
+      border: 1px solid $moduleCardButtonBorderColour;
       background-color: transparent;
       padding: 5px;
       border-radius: 4px;
-    }
 
-    & button:hover, button:active {
-      background-color: #ffe2ed;
+      &:hover, :active {
+        background-color: $moduleCardButtonHoverColour;
+      }
     }
   }
 }

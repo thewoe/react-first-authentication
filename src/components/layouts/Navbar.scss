@@ -1,23 +1,26 @@
+@import "../../variables";
+@import "../../mixins";
+
 nav {
   display: flex;
   overflow: hidden;
-  background-color: #edafb8;
+  background-color: $subheaderBackgroundColour;
   
   & > div.navItem { 
     padding: 10px; 
 
     & a {
-      color: White; 
+      color: $subheaderTextColour; 
       text-decoration: none;
     }
 
     & a.navSelected {
-      color: Black;
+      color: $standardTextColour;
     }
   }
 
   & > div.navItem:hover {
-    background-color: #f4cdd3; 
+    background-color: $navbarHoverColour; 
   }
 }
 

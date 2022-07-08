@@ -1,13 +1,16 @@
+@import "../../../variables";
+@import "../../../mixins";
+
 div.ToolTip { 
     position: relative;
 
     & div.ToolTipCreator {
         border-radius: 6px;
-        background: #77002e;
+        background: $tooltipBackgroundColour;
         padding: 5px;
         min-width: 75px;
         text-align: center;
-        color: White;
+        color: $tooltipTextColour;
         font-size: 75%;
     }
 }
