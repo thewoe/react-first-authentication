@@ -1,12 +1,12 @@
 form.reusableform {
     margin: 0px;
     padding: 0px 10px;
-}
 
-form.reusableform > div.formbuttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    position: relative;
+    & > div.formbuttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        position: relative;
+    }
 }
