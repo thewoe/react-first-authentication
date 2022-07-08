@@ -1,6 +1,6 @@
 import IconHeart from '../icon/IconHeart';
 
-import './Button.css'
+import './Button.scss';
 
 function ButtonFavoriteOverlay({ children, unFavorite }) {
     // Properties ----------------------------------

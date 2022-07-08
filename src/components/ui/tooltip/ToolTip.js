@@ -1,7 +1,7 @@
 import HoverSense from './HoverSense.js';
 import ToolTipCreator from './ToolTipCreator.js';
 
-import './ToolTip.css';
+import './ToolTip.scss';
 
 function ToolTip({ children, text }) {
   // Properties ----------------------------------

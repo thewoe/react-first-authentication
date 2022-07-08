@@ -6,13 +6,17 @@ import MySchedule from './components/pages/MySchedule';
 import MyModules from './components/pages/MyModules';
 import PageNotFound from './components/pages/404';
 
-import './App.css';
+import './App.scss';
 
 function App() {
   // Properties ----------------------------------
+
   // Hooks ---------------------------------------
+
   // Context -------------------------------------
+
   // Methods -------------------------------------
+  
   // View ----------------------------------------
   return (
     <BrowserRouter>

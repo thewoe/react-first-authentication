@@ -1,6 +1,15 @@
-import './FormInput.css';
+import './FormInput.scss';
 
-function FormTextArea({id, name, label, description=null, errormessage=null, placeholder=null}) {
+function FormTextArea({ id, name, label, description=null, errormessage=null, placeholder=null }) {
+    // Properties ----------------------------------
+
+    // Hooks ---------------------------------------
+
+    // Context -------------------------------------
+
+    // Methods -------------------------------------
+    
+    // View ----------------------------------------
     return (
         <div className='textareainput'>
             <label htmlFor={id}>{label}</label>

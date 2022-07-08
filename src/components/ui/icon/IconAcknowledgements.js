@@ -1,4 +1,4 @@
-import './IconAcknowledgements.css';
+import './IconAcknowledgements.scss';
 
 function IconAcknowledgements() {
     // Properties ----------------------------------

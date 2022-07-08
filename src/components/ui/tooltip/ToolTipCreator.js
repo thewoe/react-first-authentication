@@ -2,10 +2,13 @@ import { useState } from 'react';
 
 import Card from '../card/Card';
 
-import './ToolTip.css';
+import './ToolTip.scss';
 
 export default function ToolTipCreator({ text, isMouseOver }) {
     // Properties ----------------------------------
+    const initiatingHoverTime = 500;
+    const visibilityTime = 2500;
+
 
     // Hooks ---------------------------------------
     const [toolTipVisibility, setToolTipVisibility] = useState('hidden');
@@ -13,9 +16,6 @@ export default function ToolTipCreator({ text, isMouseOver }) {
     // Context -------------------------------------
 
     // Methods -------------------------------------
-    const initiatingHoverTime = 500;
-    const visibilityTime = 2500;
-
     const handleSetToolTipVisible = () => setToolTipVisibility('visible');
 
     const handleSetToolTipHidden = () => setToolTipVisibility('hidden');
@@ -27,6 +27,7 @@ export default function ToolTipCreator({ text, isMouseOver }) {
 
     // View ----------------------------------------
     if (isMouseOver && (toolTipVisibility==='hidden')) displayToolTip();
+    
     if (!isMouseOver && (toolTipVisibility!=='hidden')) handleSetToolTipHidden();
 
     return (

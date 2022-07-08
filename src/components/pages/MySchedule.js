@@ -5,11 +5,16 @@ import FormTextArea from "../ui/form/FormTextArea";
 
 function MySchedule() {
     // Properties ----------------------------------
+
     // Hooks ---------------------------------------
+
     // Context -------------------------------------
+
     // Methods -------------------------------------
     const onSubmit = () => alert("Submit Button Clicked");
+
     const onCancel = () => alert("Cancel Button Clicked");
+
     // View ----------------------------------------
     return (
         <>
@@ -46,7 +51,6 @@ function MySchedule() {
                         {value: 'anonymous', displaytext: 'Prefer not to say'}
                     ]}
                 />
-
             </Form>
         </>
     );

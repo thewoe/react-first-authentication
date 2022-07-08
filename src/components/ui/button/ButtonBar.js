@@ -1,4 +1,4 @@
-import './ButtonBar.css';
+import './ButtonBar.scss';
 
 function ButtonBar({ className, children }) {
     // Properties ----------------------------------

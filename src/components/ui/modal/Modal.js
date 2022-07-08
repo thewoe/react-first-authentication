@@ -1,7 +1,7 @@
 import Card from '../card/Card.js';
 import ButtonBar from '../button/ButtonBar.js';
 
-import './Modal.css';
+import './Modal.scss';
 
 export default function Modal({ title, children, buttons }) {
   // Properties ----------------------------------

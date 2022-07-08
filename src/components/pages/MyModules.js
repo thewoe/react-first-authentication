@@ -12,7 +12,7 @@ import ToolTip from '../ui/tooltip/ToolTip';
 import Modal from "../ui/modal/Modal";
 import ModuleForm from "../ui/module/ModuleForm";
 
-import './MyModules.css';
+import './MyModules.scss';
 
 function MyModules() {
     // Properties ----------------------------------

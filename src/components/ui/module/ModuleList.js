@@ -1,6 +1,6 @@
 import ModuleItem from './ModuleItem';
 
-import './ModuleList.css';
+import './ModuleList.scss';
 
 function ModuleList({ modules, handlers }) {
     // Properties ----------------------------------

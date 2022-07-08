@@ -1,4 +1,4 @@
-import './HoverCard.css';
+import './HoverCard.scss';
 
 function HoverCard({ children }) {
     // Properties ----------------------------------

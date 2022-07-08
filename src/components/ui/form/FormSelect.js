@@ -1,6 +1,15 @@
-import './FormInput.css';
+import './FormInput.scss';
 
-function FormSelect({id, name, label, description=null, errormessage=null, selectoptions=null}) {
+function FormSelect({ id, name, label, description=null, errormessage=null, selectoptions=null }) {
+    // Properties ----------------------------------
+
+    // Hooks ---------------------------------------
+
+    // Context -------------------------------------
+
+    // Methods -------------------------------------
+    
+    // View ----------------------------------------
     return (
         <div className='selectinput'>
             <label htmlFor={id}>{label}</label>

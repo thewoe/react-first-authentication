@@ -8,7 +8,7 @@ import ButtonEdit from '../button/ButtonEdit';
 import ButtonFavoriteOverlay from '../button/ButtonFavoriteOverlay';
 import ToolTip from '../tooltip/ToolTip';
 
-import './ModuleItem.css';
+import './ModuleItem.scss';
 
 function ModuleItem({ module, handlers }) {
     // Properties ----------------------------------

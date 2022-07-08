@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import './Button.css';
+import './Button.scss';
 
 Button.propTypes = {
     onClick: PropTypes.func.isRequired,

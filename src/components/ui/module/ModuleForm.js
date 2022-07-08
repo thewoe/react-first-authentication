@@ -4,15 +4,18 @@ import Form from "../form/Form";
 import FormInput from "../form/FormInput";
 import FormSelect from "../form/FormSelect";
 
-function ModuleForm({onSubmit, onCancel}) {
+function ModuleForm({ onSubmit, onCancel }) {
     // Properties ----------------------------------
+
     // Hooks ---------------------------------------
     const moduleNameInputRef = useRef();
     const moduleCodeInputRef = useRef();
     const moduleLevelInputRef = useRef();
     const moduleLeaderIdInputRef = useRef();
     const moduleImageInputRef = useRef();
+
     // Context -------------------------------------
+
     // Methods -------------------------------------
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -29,6 +32,7 @@ function ModuleForm({onSubmit, onCancel}) {
             ModuleLeaderID: enteredModuleLeaderId,
             ModuleImage: enteredModuleImage
         };
+
         onSubmit(newModule);
     }
 
@@ -39,6 +43,7 @@ function ModuleForm({onSubmit, onCancel}) {
     // const handleChange = (event) => {
     //     const modifiedModule = {...module, [event.target.name]: event.target.value};
     //     setModule(modifiedModule);
+    
     // View ----------------------------------------
     return (
         <>

@@ -1,6 +1,6 @@
 import IconAcknowledgements from '../ui/icon/IconAcknowledgements';
 
-import './Footer.css';
+import './Footer.scss';
 
 function Footer() {
     // Properties ----------------------------------
