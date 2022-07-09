@@ -2,8 +2,6 @@
 @import "../../../mixins";
 
 div.hovercard:hover {
-  transform: translate(5px,-5px);
+  @include defaultHover();
   border-radius: 6px;
-  box-shadow: 10px 5px 20px 10px rgba(70,70,70,0.3);
-  filter: brightness(100%);
 }

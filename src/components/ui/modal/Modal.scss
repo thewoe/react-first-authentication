@@ -6,17 +6,11 @@ div.modaloverlay {
   height: 100%;
   background-color: $modalOverlayColour;
   z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: fixed;
+  @include positionFixedCenter();
 }
   
 main.modalpane {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  @include positionFixedCenter();
   
   & header {
     width: 100%;
@@ -26,9 +20,7 @@ main.modalpane {
     font-size: 100%;
     border-radius: 5px 5px 0 0;;
     background-color: $subheaderBackgroundColour;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flexCenter(row);
   }
 
   & main.modaldescription {
