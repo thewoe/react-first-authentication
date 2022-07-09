@@ -36,9 +36,7 @@ main.modalpane {
     padding: 10px;
     color: $standardTextColour;
     font-size: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flexCenter(row);
 
     & > p {
       text-align: center;
@@ -46,9 +44,8 @@ main.modalpane {
   }
 
   & div.modalbuttons {
-    display: flex;
+    @include flexCenter(row);
     justify-content: flex-end;
-    align-items: center;
     padding: 10px;
     position: relative;
     right: 0px;

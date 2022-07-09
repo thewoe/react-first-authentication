@@ -5,9 +5,7 @@ form.reusableform {
     padding: 0px 10px;
 
     & > div.formbuttons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flexCenter(row);
         padding: 10px;
         position: relative;
     }

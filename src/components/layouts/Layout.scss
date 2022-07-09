@@ -4,8 +4,7 @@
 div#root {
   background: $pageBackgroundColour;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
+  @include flexCenter(row);
 
   & > div.centrepane {
     background: $pageCentrepaneBackgroundColour;

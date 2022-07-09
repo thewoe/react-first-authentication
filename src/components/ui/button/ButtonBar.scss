@@ -2,10 +2,7 @@
 @import "../../../mixins";
 
 div.buttonbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    @include flexCenter(row);
     gap: 25px;
 }
 

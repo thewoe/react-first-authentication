@@ -2,9 +2,7 @@
 @import "../../../mixins";
 
 div.list {
-  display: flex;
-  flex-direction: row;
+  @include flexCenter(row);
   flex-wrap: wrap;
-  justify-content: center;
   gap: 20px;
 }

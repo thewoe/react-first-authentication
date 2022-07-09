@@ -1,1 +1,13 @@
-// reusable mixins go here
+@mixin flexCenter($flexDirection) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $flexDirection;
+}
+
+@mixin flexEnd($flexDirection) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: $flexDirection;
+}

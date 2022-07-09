@@ -29,15 +29,12 @@ header {
     flex: 1;
     margin-right: 0.5rem;
     text-align: right;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    @include flexEnd(row);
   }
 }
 
 @media screen and (max-width: 500px) {
   header {
-    align-items: center;
-    flex-direction: column;
+    @include flexCenter(column);
   }
 }
