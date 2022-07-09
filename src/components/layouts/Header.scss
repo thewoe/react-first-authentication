@@ -17,7 +17,7 @@ header {
     & > h1 {
       color: $headerTextColour;
       margin-left: 10px;
-      font-size: 200%;
+      font-size: $headerTextSize;
     }
   
     & :hover, :active {

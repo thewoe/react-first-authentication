@@ -2,16 +2,16 @@
 @import "../../../mixins";
 
 label {
-    font-size: 15px;
+    font-size: $formInputLabelTextSize;
     font-weight: 500;
 }
 
 p.inputdescription {
-    font-size: 12px;
+    font-size: $formInputTextSize;
 }
 
 p.errormessage {
-    font-size: 12px;
+    font-size: $formInputTextSize;
     color: $errorMessageTextColour;
 }
 

@@ -25,11 +25,11 @@
     height: 75px;
 
     & > h2 {
-      font-size: 15px;
+      font-size: $moduleItemSubheaderTextSize;
     }
 
     & > h3 {
-      font-size: 14px;
+      font-size: $moduleItemSubsubheaderTextSize;
       color: $subsubheaderTextColour;
     }
   }

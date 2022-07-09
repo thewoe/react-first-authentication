@@ -3,12 +3,12 @@
 
 footer p {
   & > a {
-    font-size: 70%;
+    font-size: $footerTextSize;
     text-decoration: none;
     color: $footerTextColour;
   }
 
   & > span {
-    font-size: 70%;
+    font-size: $footerTextSize;
   }
 }
