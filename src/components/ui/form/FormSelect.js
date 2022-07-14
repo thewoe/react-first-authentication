@@ -1,6 +1,6 @@
 import './FormInput.scss';
 
-function FormSelect({ id, name, label, description=null, errormessage=null, selectoptions=[], children }) {
+function FormSelect({ id, name, label, description=null, errormessage=null, selectoptions=[], children, value=null, onChange }) {
     // Properties ----------------------------------
 
     // Hooks ---------------------------------------
@@ -17,7 +17,7 @@ function FormSelect({ id, name, label, description=null, errormessage=null, sele
                 description &&
                     <p className='inputdescription'>{description}</p>
             }
-            <select id={id} name={name}>
+            <select id={id} name={name} defaultValue={value} onChange={onChange}>
                 {selectoptions.map(selectoption => {
                     return (
                         <option 

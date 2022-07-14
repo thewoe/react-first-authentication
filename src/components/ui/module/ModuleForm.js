@@ -1,24 +1,30 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { apiRequest } from "../../api/apiRequest";
 
 import Form from "../form/Form";
 import FormInput from "../form/FormInput";
 import FormSelect from "../form/FormSelect";
 
-function ModuleForm({ onSubmit, onCancel }) {
+function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
     // Properties ----------------------------------
     const API_URL = 'https://my.api.mockaroo.com/';
     const API_KEY = '?key=bb6adbc0';
 
+    if (!existingModule) {
+        existingModule = {
+          ModuleName: "",
+          ModuleCode: "",
+          ModuleLevel: 3,
+          ModuleLeaderID: 0,
+          ModuleImage: ""
+        }
+    }
+
     // Hooks ---------------------------------------
     const [loadingMessage, setLoadingMessage] = useState("Loading Users...");
     const [users, setUsers] = useState(null);
-
-    const moduleNameInputRef = useRef();
-    const moduleCodeInputRef = useRef();
-    const moduleLevelInputRef = useRef();
-    const moduleLeaderIdInputRef = useRef();
-    const moduleImageInputRef = useRef();
+    const [moduleForm, setModuleForm] = useState(existingModule);
+    const [errors, setErrors] = useState(Object.keys(existingModule).reduce((accum, key) => ({ ...accum, [key]: null }), {}));
 
     // Context -------------------------------------
     useEffect(() => { fetchUsers() }, []);
@@ -31,30 +37,13 @@ function ModuleForm({ onSubmit, onCancel }) {
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        const enteredModuleName = moduleNameInputRef.current.value;
-        const enteredModuleCode = moduleCodeInputRef.current.value;
-        const enteredModuleLevel = moduleLevelInputRef.current.value;
-        const enteredModuleLeaderId = moduleLeaderIdInputRef.current.value;
-        const enteredModuleImage = moduleImageInputRef.current.value;
-
-        const newModule = {
-            ModuleName: enteredModuleName,
-            ModuleCode: enteredModuleCode,
-            ModuleLevel: enteredModuleLevel,
-            ModuleLeaderID: enteredModuleLeaderId,
-            ModuleImage: enteredModuleImage
-        };
-
-        onSubmit(newModule);
+        moduleForm.ModuleLevel = parseInt(moduleForm.ModuleLevel);
+        moduleForm.ModuleLeaderID = parseInt(moduleForm.ModuleLeaderID);
+        onSubmit(moduleForm);
     }
-
     const handleChange = (event) => {
-        console.log(event.target.name);
+        setModuleForm({ ...moduleForm, [event.target.name]: event.target.value });
     }
-    
-    // const handleChange = (event) => {
-    //     const modifiedModule = {...module, [event.target.name]: event.target.value};
-    //     setModule(modifiedModule);
     
     // View ----------------------------------------
     return (
@@ -66,9 +55,9 @@ function ModuleForm({ onSubmit, onCancel }) {
                     name='ModuleName'
                     label='Module Name'
                     description='Enter the title of the module'
-                    errormessage=''
+                    errormessage={errors.ModuleName}
                     placeholder='Games Programming'
-                    ref={moduleNameInputRef}
+                    value={moduleForm.ModuleName}
                     onChange={handleChange}
                 />
                 <FormInput 
@@ -77,9 +66,9 @@ function ModuleForm({ onSubmit, onCancel }) {
                     name='ModuleCode'
                     label='Module Code'
                     description='Enter the code of the module'
-                    errormessage=''
+                    errormessage={errors.ModuleCode}
                     placeholder='CI0380'
-                    ref={moduleCodeInputRef}
+                    value={moduleForm.ModuleCode}
                     onChange={handleChange}
                 />
                 <FormSelect
@@ -87,7 +76,7 @@ function ModuleForm({ onSubmit, onCancel }) {
                     name='ModuleLevel'
                     label='Module Level'
                     description='Enter the level of the module'
-                    errormessage=''
+                    errormessage={errors.ModuleLevel}
                     selectoptions = {[
                         {value: '3', displaytext: '3'},
                         {value: '4', displaytext: '4'},
@@ -95,7 +84,7 @@ function ModuleForm({ onSubmit, onCancel }) {
                         {value: '6', displaytext: '6'},
                         {value: '7', displaytext: '7'}
                     ]}
-                    ref={moduleLevelInputRef}
+                    value={moduleForm.ModuleLevel}
                     onChange={handleChange}
                 />
                 <FormSelect
@@ -103,9 +92,9 @@ function ModuleForm({ onSubmit, onCancel }) {
                     name='ModuleLeaderID'
                     label='Module Leader ID'
                     description='Enter the module leader ID'
-                    errormessage=''
+                    errormessage={errors.ModuleLeaderID}
                     selectoptions={[{value:'0', displaytext: 'Select a module leader'}]}
-                    ref={moduleLeaderIdInputRef}
+                    value={moduleForm.ModuleLeaderID}
                     onChange={handleChange}
                 >
                     {
@@ -131,9 +120,9 @@ function ModuleForm({ onSubmit, onCancel }) {
                     name='ModuleImage'
                     label='Module Image'
                     description='Enter the image url of the module'
-                    errormessage=''
+                    errormessage={errors.ModuleImage}
                     placeholder='https://images.freeimages.com/images/small-previews/64b/vla-1-1315506.jpg'
-                    ref={moduleImageInputRef}
+                    value={moduleForm.ModuleImage}
                     onChange={handleChange}
                 />
             </Form>

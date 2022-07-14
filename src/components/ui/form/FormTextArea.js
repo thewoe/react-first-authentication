@@ -1,6 +1,6 @@
 import './FormInput.scss';
 
-function FormTextArea({ id, name, label, description=null, errormessage=null, placeholder=null }) {
+function FormTextArea({ id, name, label, description=null, errormessage=null, placeholder=null, value=null, onChange }) {
     // Properties ----------------------------------
 
     // Hooks ---------------------------------------
@@ -17,7 +17,7 @@ function FormTextArea({ id, name, label, description=null, errormessage=null, pl
                 description &&
                     <p className='inputdescription'>{description}</p>
             }
-            <textarea id={id} name={name} placeholder={placeholder}>
+            <textarea id={id} name={name} placeholder={placeholder} defaultValue={value} onChange={onChange}>
             </textarea>
             {
                 errormessage &&

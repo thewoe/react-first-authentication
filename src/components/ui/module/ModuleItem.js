@@ -22,7 +22,7 @@ function ModuleItem({ module, handlers }) {
 
     const handleUnfavorite = () => handlers.handleUnfavorite(module.ModuleID);
 
-    const handleEdit = () => handlers.handleEdit(module.ModuleID);
+    const handleEdit = () => handlers.handleEdit(module);
 
     const handleDelete = () => handlers.handleDelete(module.ModuleID);
 

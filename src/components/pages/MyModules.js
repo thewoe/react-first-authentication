@@ -48,8 +48,9 @@ function MyModules() {
         handleCancel();
     }
 
-    const onEdit = (editedModule) => {
-        setModules([...modules, editedModule]);
+    const onEdit = (editModule) => {
+        const editModuleID = modules.findIndex(module => module.ModuleID === editModule.ModuleID);
+        setModules(modules.map((module, index) => index === editModuleID ? editModule : module));
         handleCancel();
     }
 
@@ -80,8 +81,8 @@ function MyModules() {
         setModalVisibility(true);
     };
 
-    const handleEdit = () => {
-        initialiseEditModal();
+    const handleEdit = (editModule) => {
+        initialiseEditModal(editModule);
         setModalVisibility(true);
     }
 
@@ -117,10 +118,10 @@ function MyModules() {
         );
     };
 
-    const initialiseEditModal = () => {
+    const initialiseEditModal = (editModule) => {
         createModal(
             'Edit Module',
-            <ModuleForm onCancel={handleCancel} onSubmit={onEdit} />,
+            <ModuleForm onCancel={handleCancel} onSubmit={onEdit} existingModule={editModule}/>,
             []
         );
     };
