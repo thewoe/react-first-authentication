@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { apiRequest } from "../../api/apiRequest";
 
 import Form from "../form/Form";
 import FormInput from "../form/FormInput";
@@ -6,8 +7,13 @@ import FormSelect from "../form/FormSelect";
 
 function ModuleForm({ onSubmit, onCancel }) {
     // Properties ----------------------------------
+    const API_URL = 'https://my.api.mockaroo.com/';
+    const API_KEY = '?key=bb6adbc0';
 
     // Hooks ---------------------------------------
+    const [loadingMessage, setLoadingMessage] = useState("Loading Users...");
+    const [users, setUsers] = useState(null);
+
     const moduleNameInputRef = useRef();
     const moduleCodeInputRef = useRef();
     const moduleLevelInputRef = useRef();
@@ -15,8 +21,14 @@ function ModuleForm({ onSubmit, onCancel }) {
     const moduleImageInputRef = useRef();
 
     // Context -------------------------------------
+    useEffect(() => { fetchUsers() }, []);
 
     // Methods -------------------------------------
+    const fetchUsers = async () => {
+        const outcome = await apiRequest(API_URL, 'Users', API_KEY);
+        if (outcome.success) setUsers (outcome.response);
+        else setLoadingMessage(`Error ${outcome.response.status}: Users could not be found.`);
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         const enteredModuleName = moduleNameInputRef.current.value;
@@ -86,17 +98,33 @@ function ModuleForm({ onSubmit, onCancel }) {
                     ref={moduleLevelInputRef}
                     onChange={handleChange}
                 />
-                <FormInput 
-                    type='text'
+                <FormSelect
                     id='moduleleaderid'
                     name='ModuleLeaderID'
                     label='Module Leader ID'
                     description='Enter the module leader ID'
                     errormessage=''
-                    placeholder='37'
+                    selectoptions={[{value:'0', displaytext: 'Select a module leader'}]}
                     ref={moduleLeaderIdInputRef}
                     onChange={handleChange}
-                />
+                >
+                    {
+                        !users
+                            ? <p>{loadingMessage}</p>
+                            : users.length === 0
+                                ? <p>No users found</p>
+                                : users.map((user) => 
+                                    <option 
+                                        key={user.UserID} 
+                                        value={user.UserID}
+                                    >
+                                        {user.UserLastname}
+                                        {', '}
+                                        {user.UserFirstname}
+                                    </option>
+                                  )
+                    }
+                </FormSelect>
                 <FormInput 
                     type='text'
                     id='moduleimage'

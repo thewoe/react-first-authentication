@@ -1,6 +1,6 @@
 import './FormInput.scss';
 
-function FormSelect({ id, name, label, description=null, errormessage=null, selectoptions=null }) {
+function FormSelect({ id, name, label, description=null, errormessage=null, selectoptions=[], children }) {
     // Properties ----------------------------------
 
     // Hooks ---------------------------------------
@@ -28,6 +28,7 @@ function FormSelect({ id, name, label, description=null, errormessage=null, sele
                         </option>
                     );
                 })}
+                {children}
             </select>
             {
                 errormessage &&
