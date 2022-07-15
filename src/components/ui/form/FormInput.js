@@ -1,6 +1,6 @@
 import './FormInput.scss';
 
-function FormInput({ type, id, name, label, description=null, errormessage=null, placeholder=null, value=null, onChange }) {
+function FormInput({ type, id, name, label, description=null, errormessage=null, placeholder=null, value=null, onChange, onKeyUp }) {
     // Properties ----------------------------------
 
     // Hooks ---------------------------------------
@@ -17,7 +17,7 @@ function FormInput({ type, id, name, label, description=null, errormessage=null,
                 description && 
                     <p className='inputdescription'>{description}</p>
             }
-            <input type={type} id={id} name={name} placeholder={placeholder} defaultValue={value} onChange={onChange}/>
+            <input type={type} id={id} name={name} placeholder={placeholder} defaultValue={value} onChange={onChange} onKeyUp={onKeyUp}/>
             {
                 errormessage &&
                     <p className='errormessage'>{errormessage}</p>
