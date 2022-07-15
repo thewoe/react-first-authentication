@@ -38,7 +38,7 @@ function ModuleItem({ module, handlers }) {
                 }
                 <div className='item'>
                     <div className='image'>
-                        <img src={module.ModuleImage} alt={module.ModuleName} />
+                        <img src={module.ModuleImageURL} alt={module.ModuleName} />
                     </div>
                     <div className='content'>
                         <h2>{module.ModuleName} ({module.ModuleCode})</h2>
