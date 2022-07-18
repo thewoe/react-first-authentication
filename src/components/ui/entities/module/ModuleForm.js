@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { apiRequest } from "../../../api/apiRequest";
+
+import { apiRequest } from "../../../api/API";
 
 import Form from "../../form/Form";
 import FormInput from "../../form/FormInput";
@@ -32,7 +33,7 @@ function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
         else setLoadingMessage(`Error ${outcome.response.status}: Users could not be found.`);
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = event => {
         event.preventDefault();
         moduleForm.ModuleLevel = parseInt(moduleForm.ModuleLevel);
         moduleForm.ModuleLeaderID = parseInt(moduleForm.ModuleLeaderID);
@@ -55,12 +56,12 @@ function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
         }
     }
 
-    const handleChange = (event) => {
+    const handleChange = event => {
         setNoFormInput(false);
         setModuleForm({ ...moduleForm, [event.target.name]: event.target.value });
     }
 
-    const handleKeyUp = (event) => {
+    const handleKeyUp = event => {
         setErrors(realtimeValidator(event));
     }
 

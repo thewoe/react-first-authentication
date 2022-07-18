@@ -3,6 +3,7 @@ import { useState } from "react";
 import Form from "../../form/Form";
 import FormInput from "../../form/FormInput";
 import FormSelect from "../../form/FormSelect";
+import { validateUserFirstname, validateUserLastname, validateUserEmail, validateUserImage, realtimeValidator } from "./UserFormValidation";
 
 import '../../form/FormInput.scss';
 
@@ -26,19 +27,14 @@ function UserForm({ onSubmit, onCancel, existingUser=null }) {
 
         if (userForm.UserFirstname !== "" || userForm.UserLastname !== "" || userForm.UserEmail !== "" || userForm.UserUsertypeID !== 0 || userForm.UserLevel !== 0 || userForm.UserImageURL !== "") {
             setNoFormInput(false);
-            const userFirstnameErrors = validateUserFirstname();
-            const userLastnameErrors = validateUserLastname();
-            const userEmailErrors = validateUserEmail();
-            const userImageErrors = validateUserImage();
-
             setErrors({
-                UserFirstname: userFirstnameErrors,
-                UserLastname: userLastnameErrors,
-                UserEmail: userEmailErrors,
-                UserImageURL: userImageErrors
+                UserFirstname: validateUserFirstname(userForm.UserFirstname),
+                UserLastname: validateUserLastname(userForm.UserLastname),
+                UserEmail: validateUserEmail(userForm.UserEmail),
+                UserImageURL: validateUserImage(userForm.UserImageURL)
             });
 
-            if (!userFirstnameErrors && !userLastnameErrors && !userEmailErrors && !userImageErrors) {
+            if (!errors.UserFirstname && !errors.UserLastname && !errors.UserEmail && !errors.UserImageURL) {
                 onSubmit(userForm);
             }
         }
@@ -53,57 +49,7 @@ function UserForm({ onSubmit, onCancel, existingUser=null }) {
     }
 
     const handleKeyUp = (event) => {
-        realtimeValidator(event);
-    }
-
-    const realtimeValidator = (event) => {
-        switch (event.target.name) {
-            case 'UserFirstname':
-                var userFirstnameValidation = validateUserFirstname();
-                break;
-            case 'UserLastname':
-                var userLastnameValidation = validateUserLastname();
-                break;
-            case 'UserEmail':
-                var userEmailValidation = validateUserEmail();
-                break;
-            case 'UserImageURL':
-                var userImageURLValidation = validateUserImage();
-                break;
-            default:
-                break;
-        }
-        
-        setErrors({
-            UserFirstname: userFirstnameValidation,
-            UserLastname: userLastnameValidation,
-            UserEmail: userEmailValidation,
-            UserImageURL: userImageURLValidation
-        });
-    }
-
-    const validateUserFirstnameLength = () => userForm.UserFirstname.length < 2 && "First name must be more than 1 character. ";
-
-    const validateUserFirstname = () => {
-        return validateUserFirstnameLength();
-    }
-
-    const validateUserLastnameLength = () => userForm.UserFirstname.length < 3 && "Last name must be more than 2 characters. ";
-
-    const validateUserLastname = () => {
-        return validateUserLastnameLength();
-    }
-
-    const validateUserEmailFormat = () => !(/^([\w.-]+)@([\w-]+)((\.(\w){2,3})+)$/.test(userForm.UserEmail)) && "User email must be in a valid email format. ";
-
-    const validateUserEmail = () => {
-        return validateUserEmailFormat();
-    }
-
-    const validateUserImageFormat = () => !(/^(http|https):\/\/(([a-zA-Z0-9$\-_.+!*'(),;:&=]|%[0-9a-fA-F]{2})+@)?(((25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])(\.(25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])){3})|localhost|([a-zA-Z0-9\-\u00C0-\u017F]+\.)+([a-zA-Z]{2,}))(:[0-9]+)?(\/(([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{2})*(\/([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{2})*)*)?(\?([a-zA-Z0-9$\-_.+!*'(),;:@&=/?]|%[0-9a-fA-F]{2})*)?(#([a-zA-Z0-9$\-_.+!*'(),;:@&=/?]|%[0-9a-fA-F]{2})*)?)?$/.test(userForm.UserImageURL)) && "User image must be in a valid URL format. ";
-    
-    const validateUserImage = () => {
-        return validateUserImageFormat();
+        setErrors(realtimeValidator(event));
     }
 
     // View ----------------------------------------

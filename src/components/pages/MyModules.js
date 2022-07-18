@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { apiRequest } from "../api/apiRequest";
+import { apiRequest } from "../api/API";
 
 import ModuleList from "../ui/entities/module/ModuleList";
 import ButtonBar from "../ui/button/ButtonBar";
@@ -49,13 +49,13 @@ function MyModules() {
 
     const handleShowFavorites = () => setModules(modules.filter((module) => module.isFavorite));
 
-    const onSubmit = (newModule) => {
+    const onSubmit = newModule => {
         newModule.ModuleID = modules.length+1;
         setModules([...modules, newModule]);
         handleCancel();
     }
 
-    const onEdit = (editModule) => {
+    const onEdit = editModule => {
         const editModuleID = modules.findIndex(module => module.ModuleID === editModule.ModuleID);
         setModules(modules.map((module, index) => index === editModuleID ? editModule : module));
         handleCancel();
@@ -88,7 +88,7 @@ function MyModules() {
         setModalVisibility(true);
     };
 
-    const handleEdit = (editModule) => {
+    const handleEdit = editModule => {
         initialiseEditModal(editModule);
         setModalVisibility(true);
     }
@@ -126,7 +126,7 @@ function MyModules() {
         );
     };
 
-    const initialiseEditModal = (editModule) => {
+    const initialiseEditModal = editModule => {
         createModal(
             'Edit Module',
             <ModuleForm onCancel={handleCancel} onSubmit={onEdit} existingModule={editModule}/>,
@@ -134,7 +134,7 @@ function MyModules() {
         );
     };
 
-    const handleModuleClick = (moduleId) => navigate('/students');
+    const handleModuleClick = moduleId => navigate('/students');
     
     // View ----------------------------------------
     return (

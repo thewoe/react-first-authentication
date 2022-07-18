@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { apiRequest } from "../api/apiRequest";
+
+import { apiRequest } from "../api/API";
 
 import UserList from "../ui/entities/user/UserList";
 import ButtonBar from "../ui/button/ButtonBar";
@@ -43,13 +44,13 @@ function Students() {
         else setLoadingMessage(`Error ${outcome.response.status}: Users could not be found.`);
     }
 
-    const onSubmit = (newUser) => {
+    const onSubmit = newUser => {
         newUser.UserID = users.length+1;
         setUsers([...users, newUser]);
         handleCancel();
     }
 
-    const onEdit = (editUser) => {
+    const onEdit = editUser => {
         const editUserID = users.findIndex(user => user.UserID === editUser.UserID);
         setUsers(users.map((user, index) => index === editUserID ? editUser : user));
         handleCancel();
@@ -70,7 +71,7 @@ function Students() {
         setModalVisibility(true);
     };
 
-    const handleEdit = (editUser) => {
+    const handleEdit = editUser => {
         initialiseEditModal(editUser);
         setModalVisibility(true);
     }
@@ -108,7 +109,7 @@ function Students() {
         );
     };
 
-    const initialiseEditModal = (editUser) => {
+    const initialiseEditModal = editUser => {
         createModal(
             'Edit User',
             <UserForm onCancel={handleCancel} onSubmit={onEdit} existingUser={editUser}/>,

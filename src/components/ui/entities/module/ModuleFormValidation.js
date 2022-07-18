@@ -30,15 +30,15 @@ export const validateModuleImage = moduleImage => {
 
 export const realtimeValidator = event => {
     if (event.target.name === 'ModuleName') var moduleNameValidation = validateModuleName(event.target.value);
-    else if (event.target.name === 'ModuleCode') var moduleCodeValidation = validateModuleCode(event.target.value);
-    else if (event.target.name === 'ModuleLevel') var moduleLevelValidation = validateModuleLevel(event.target.value);
-    else if (event.target.name === 'ModuleLeaderID') var moduleLeaderValidation = validateModuleLeader(event.target.value);
-    else if (event.target.name === 'ModuleImageURL') var moduleImageValidation = validateModuleImage(event.target.value);
+    if (event.target.name === 'ModuleCode') var moduleCodeValidation = validateModuleCode(event.target.value);
+    if (event.target.name === 'ModuleLevel') var moduleLevelValidation = validateModuleLevel(event.target.value);
+    if (event.target.name === 'ModuleLeaderID') var moduleLeaderValidation = validateModuleLeader(event.target.value);
+    if (event.target.name === 'ModuleImageURL') var moduleImageValidation = validateModuleImage(event.target.value);
     return { 
         ModuleName: moduleNameValidation,
         ModuleCode: moduleCodeValidation,
         ModuleLevel: moduleLevelValidation,
         ModuleLeaderID: moduleLeaderValidation,
         ModuleImageURL: moduleImageValidation
-    }
+    };
 }
