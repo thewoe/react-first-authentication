@@ -4,6 +4,7 @@ import { apiRequest } from "../../../api/apiRequest";
 import Form from "../../form/Form";
 import FormInput from "../../form/FormInput";
 import FormSelect from "../../form/FormSelect";
+import { validateModuleName, validateModuleCode, validateModuleLevel, validateModuleLeader, validateModuleImage, realtimeValidator } from "./ModuleFormValidation";
 
 import '../../form/FormInput.scss';
 
@@ -12,15 +13,7 @@ function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
     const API_URL = 'https://my.api.mockaroo.com/';
     const API_KEY = '?key=bb6adbc0';
 
-    if (!existingModule) {
-        existingModule = {
-          ModuleName: "",
-          ModuleCode: "",
-          ModuleLevel: 3,
-          ModuleLeaderID: 0,
-          ModuleImage: ""
-        }
-    }
+    if (!existingModule) existingModule = { ModuleName: "", ModuleCode: "", ModuleLevel: 3, ModuleLeaderID: 0, ModuleImageURL: "" };
 
     // Hooks ---------------------------------------
     const [loadingMessage, setLoadingMessage] = useState("Loading Users...");
@@ -44,23 +37,16 @@ function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
         moduleForm.ModuleLevel = parseInt(moduleForm.ModuleLevel);
         moduleForm.ModuleLeaderID = parseInt(moduleForm.ModuleLeaderID);
 
-        if (moduleForm.ModuleName !== "" || moduleForm.ModuleCode !== "" || moduleForm.ModuleLevel !== 3 || moduleForm.ModuleLeaderID !== 0 || moduleForm.ModuleImage !== "") {
+        if (moduleForm.ModuleName !== "" || moduleForm.ModuleCode !== "" || moduleForm.ModuleLevel !== 3 || moduleForm.ModuleLeaderID !== 0 || moduleForm.ModuleImageURL !== "") {
             setNoFormInput(false);
-            const moduleNameErrors = validateModuleName();
-            const moduleCodeErrors = validateModuleCode();
-            const moduleLevelErrors = validateModuleLevel();
-            const moduleLeaderErrors = validateModuleLeader();
-            const moduleImageErrors = validateModuleImage();
-
             setErrors({
-                ModuleName: moduleNameErrors,
-                ModuleCode: moduleCodeErrors,
-                ModuleLevel: moduleLevelErrors,
-                ModuleLeaderID: moduleLeaderErrors,
-                ModuleImage: moduleImageErrors
+                ModuleName: validateModuleName(moduleForm.ModuleName),
+                ModuleCode: validateModuleCode(moduleForm.ModuleCode),
+                ModuleLevel: validateModuleLevel(moduleForm.ModuleLevel),
+                ModuleLeaderID: validateModuleLeader(moduleForm.ModuleLeaderID),
+                ModuleImageURL: validateModuleImage(moduleForm.ModuleImageURL)
             });
-
-            if (!moduleNameErrors && !moduleCodeErrors && !moduleLevelErrors && !moduleLeaderErrors && !moduleImageErrors) {
+            if (!errors.ModuleName && !errors.ModuleCode && !errors.ModuleLevel && !errors.ModuleLeaderID && !errors.ModuleImageURL) {
                 onSubmit(moduleForm);
             }
         }
@@ -75,67 +61,7 @@ function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
     }
 
     const handleKeyUp = (event) => {
-        realtimeValidator(event);
-    }
-
-    const realtimeValidator = (event) => {
-        switch (event.target.name) {
-            case 'ModuleName':
-                var moduleNameValidation = validateModuleName();
-                break;
-            case 'ModuleCode':
-                var moduleCodeValidation = validateModuleCode();
-                break;
-            case 'ModuleLevel':
-                var moduleLevelValidation = validateModuleLevel();
-                break;
-            case 'ModuleLeaderID':
-                var moduleLeaderValidation = validateModuleLeader();
-                break;
-            case 'ModuleImage':
-                var moduleImageValidation = validateModuleImage();
-                break;
-            default:
-                break;
-        }
-        
-        setErrors({
-            ModuleName: moduleNameValidation,
-            ModuleCode: moduleCodeValidation,
-            ModuleLevel: moduleLevelValidation,
-            ModuleLeaderID: moduleLeaderValidation,
-            ModuleImage: moduleImageValidation
-        });
-    }
-
-    const validateModuleNameLength = () => moduleForm.ModuleName.length < 8 && "Module name must be more than 8 characters. ";
-
-    const validateModuleName = () => {
-        return validateModuleNameLength();
-    }
-
-    const validateModuleCodeFormat = () => !(/^\D{2}\d{4}$/.test(moduleForm.ModuleCode)) && "Module code must be in format CI5250. ";
-
-    const validateModuleCode = () => {
-        return validateModuleCodeFormat();
-    }
-
-    const validateModuleLevelNumber = () => ((moduleForm.ModuleLevel < 2) && (moduleForm.ModuleLevel > 8)) && "Module level must be between 3 and 7. ";
-
-    const validateModuleLevel = () => {
-        return validateModuleLevelNumber();
-    }
-
-    const validateModuleLeaderIntType = () => !parseInt(moduleForm.ModuleLeaderID) && "Module Leader ID must be an integer. ";
-
-    const validateModuleLeader = () => {
-        return validateModuleLeaderIntType();
-    }
-
-    const validateModuleImageFormat = () => !(/^(http|https):\/\/(([a-zA-Z0-9$\-_.+!*'(),;:&=]|%[0-9a-fA-F]{2})+@)?(((25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])(\.(25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])){3})|localhost|([a-zA-Z0-9\-\u00C0-\u017F]+\.)+([a-zA-Z]{2,}))(:[0-9]+)?(\/(([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{2})*(\/([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{2})*)*)?(\?([a-zA-Z0-9$\-_.+!*'(),;:@&=/?]|%[0-9a-fA-F]{2})*)?(#([a-zA-Z0-9$\-_.+!*'(),;:@&=/?]|%[0-9a-fA-F]{2})*)?)?$/.test(moduleForm.ModuleImage)) && "Module image must be in a valid URL format. ";
-    
-    const validateModuleImage = () => {
-        return validateModuleImageFormat();
+        setErrors(realtimeValidator(event));
     }
 
     // View ----------------------------------------
@@ -217,12 +143,12 @@ function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
                 <FormInput 
                     type='text'
                     id='moduleimage'
-                    name='ModuleImage'
+                    name='ModuleImageURL'
                     label='Module Image'
                     description='Enter the image url of the module'
-                    errormessage={errors.ModuleImage}
+                    errormessage={errors.ModuleImageURL}
                     placeholder='https://www.images.com/mypic.jpg'
-                    value={moduleForm.ModuleImage}
+                    value={moduleForm.ModuleImageURL}
                     onChange={handleChange}
                     onKeyUp={handleKeyUp}
                 />

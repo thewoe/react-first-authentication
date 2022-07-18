@@ -8,18 +8,7 @@ import '../../form/FormInput.scss';
 
 function UserForm({ onSubmit, onCancel, existingUser=null }) {
     // Properties ----------------------------------
-    if (!existingUser) {
-        existingUser = {
-          UserFirstname: "",
-          UserLastname: "",
-          UserEmail: "",
-          UserPassword: "",
-          UserRegistered: false,
-          UserUsertypeID: 0,
-          UserLevel: 0,
-          UserImageURL: ""
-        }
-    }
+    if (!existingUser) existingUser = { UserFirstname: "", UserLastname: "", UserEmail: "", UserPassword: "", UserRegistered: false, UserUsertypeID: 0, UserLevel: 0, UserImageURL: "" };
 
     // Hooks ---------------------------------------
     const [userForm, setUserForm] = useState(existingUser);
