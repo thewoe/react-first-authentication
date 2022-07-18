@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { apiRequest } from "../api/apiRequest";
 
-import ModuleList from "../ui/module/ModuleList";
+import ModuleList from "../ui/entities/module/ModuleList";
 import ButtonBar from "../ui/button/ButtonBar";
 import ButtonShowAll from "../ui/button/ButtonShowAll";
 import ButtonShowFavorites from "../ui/button/ButtonShowFavorites";
-import ButtonAddModule from "../ui/button/ButtonAddModule";
+import ButtonAdd from "../ui/button/ButtonAdd";
 import ButtonNo from "../ui/button/ButtonNo";
 import ButtonYes from "../ui/button/ButtonYes";
 import ToolTip from '../ui/tooltip/ToolTip';
 import Modal from "../ui/modal/Modal";
-import ModuleForm from "../ui/module/ModuleForm";
+import ModuleForm from "../ui/entities/module/ModuleForm";
 
 import './MyModules.scss';
 
@@ -18,6 +20,8 @@ function MyModules() {
     // Properties ----------------------------------
     const API_URL = 'https://my.api.mockaroo.com/';
     const API_KEY = '?key=bb6adbc0';
+    const navigate = useNavigate();
+    var modalNumber = 0;
 
     // Hooks ---------------------------------------
     const [loadingMessage, setLoadingMessage] = useState("Loading Modules...");
@@ -38,7 +42,10 @@ function MyModules() {
         else setLoadingMessage(`Error ${outcome.response.status}: Modules could not be found.`);
     }
 
-    const handleShowAll = () => fetchModules();
+    const handleShowAll = () => {
+        setModules(null);
+        fetchModules();
+    }
 
     const handleShowFavorites = () => setModules(modules.filter((module) => module.isFavorite));
 
@@ -92,6 +99,7 @@ function MyModules() {
         setModalTitle(title);
         setModalDescription(description);
         setModalButtons(buttons);
+        modalNumber++;
     };
     
     const initialiseDeleteModal = id => {
@@ -125,6 +133,8 @@ function MyModules() {
             []
         );
     };
+
+    const handleModuleClick = (moduleId) => navigate('/students');
     
     // View ----------------------------------------
     return (
@@ -139,7 +149,7 @@ function MyModules() {
                         <ButtonShowFavorites hasTitle onClick={handleShowFavorites} />
                     </ToolTip>
                     <ToolTip text='Add module'>
-                        <ButtonAddModule hasTitle onClick={handleAdd} />
+                        <ButtonAdd hasTitle item='Module' onClick={handleAdd} />
                     </ToolTip>
                 </ButtonBar>
             </div>
@@ -150,12 +160,12 @@ function MyModules() {
                     ? <p>No modules found</p>
                     : <ModuleList 
                         modules={modules}
-                        handlers={{ handleFavorite, handleUnfavorite, handleEdit, handleDelete: handleDeleteRequest }}
+                        handlers={{ handleFavorite, handleUnfavorite, handleEdit, handleDelete: handleDeleteRequest, handleModuleClick }}
                       />
             }
             {
                 modalVisibility &&
-                    <Modal title={modalTitle} buttons={modalButtons}>
+                    <Modal key={`${modalTitle}${modalNumber}`} title={modalTitle} buttons={modalButtons}>
                         {modalDescription}
                     </Modal>
             }

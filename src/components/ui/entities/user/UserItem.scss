@@ -1,0 +1,40 @@
+/* -------------------------------------------- */
+/* Styling //////////////////////////////////// */
+/* -------------------------------------------- */
+
+div.item {
+  display: flex;
+  font-size: 90%;
+  width: 400px;
+
+  // Image section
+  & > .image {
+    width: 130px;
+    height: 130px;
+    border-radius: 5px 0px 0px 5px;
+
+    & > img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 5px 0px 0px 5px;
+    }
+  }
+
+  & > .content {
+      width: 100%;
+      padding: 10px;
+    
+      & > h2 { font-size: inherit; }
+      & > h3 { 
+        color: Grey; 
+        &.cardAttribute::after { content: " "; }
+      }
+    }
+
+    // Actions section
+    & > .modulebuttons {
+      float: right;
+      padding-right: 10px;
+    }
+  }

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { apiRequest } from "../../api/apiRequest";
+import { apiRequest } from "../../../api/apiRequest";
 
-import Form from "../form/Form";
-import FormInput from "../form/FormInput";
-import FormSelect from "../form/FormSelect";
+import Form from "../../form/Form";
+import FormInput from "../../form/FormInput";
+import FormSelect from "../../form/FormSelect";
 
-import '../form/FormInput.scss';
+import '../../form/FormInput.scss';
 
 function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
     // Properties ----------------------------------
@@ -199,9 +199,9 @@ function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
                 >
                     {
                         !users
-                            ? <p>{loadingMessage}</p>
+                            ? <option key='0' value='0'>{loadingMessage}</option>
                             : users.length === 0
-                                ? <p>No users found</p>
+                                ? <option key='0' value='0'>No users found</option>
                                 : users.map((user) => 
                                     <option 
                                         key={user.UserID} 
@@ -221,7 +221,7 @@ function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
                     label='Module Image'
                     description='Enter the image url of the module'
                     errormessage={errors.ModuleImage}
-                    placeholder='https://images.freeimages.com/images/small-previews/64b/vla-1-1315506.jpg'
+                    placeholder='https://www.images.com/mypic.jpg'
                     value={moduleForm.ModuleImage}
                     onChange={handleChange}
                     onKeyUp={handleKeyUp}

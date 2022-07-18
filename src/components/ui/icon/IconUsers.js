@@ -1,7 +1,6 @@
-import Button from './Button';
-import IconAdd from '../icon/IconAdd';
+import './Icon.scss';
 
-function ButtonAddModule({ onClick, hasTitle=false }) {
+function IconUsers() {
     // Properties ----------------------------------
 
     // Hooks ---------------------------------------
@@ -12,10 +11,10 @@ function ButtonAddModule({ onClick, hasTitle=false }) {
 
     // View ----------------------------------------
     return (
-        <Button onClick={onClick} hasTitle={hasTitle} title='Add Module'>
-            <IconAdd />
-        </Button>
+        <>
+            <img src='https://img.icons8.com/ios-filled/50/000000/user-account.png' alt='Users Icon' />
+        </>
     );
 }
 
-export default ButtonAddModule;
+export default IconUsers;

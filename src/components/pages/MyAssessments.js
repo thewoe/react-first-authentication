@@ -8,6 +8,7 @@ import Modal from '../ui/modal/Modal.js';
 function MyAssessments() {
     // Properties ----------------------------------
     const buttons = [];
+    var modalNumber = 0;
 
     // Hooks ---------------------------------------
     const [modalVisibility, setModalVisibility] = useState(true);
@@ -37,7 +38,7 @@ function MyAssessments() {
             <h1>My Assessments</h1>
             {
                 modalVisibility && (
-                    <Modal title="Terms of Service" buttons={buttons}>
+                    <Modal key={modalNumber} title="Terms of Service" buttons={buttons}>
                         <p>Do you agree to our terms of service?</p>
                     </Modal>
                 )

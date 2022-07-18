@@ -1,12 +1,12 @@
-import Card from '../card/Card';
-import HoverCard from '../card/HoverCard';
-import ButtonBar from '../button/ButtonBar';
-import ButtonUnfavorite from '../button/ButtonUnfavorite';
-import ButtonFavorite from '../button/ButtonFavorite';
-import ButtonDelete from '../button/ButtonDelete';
-import ButtonEdit from '../button/ButtonEdit';
-import ButtonFavoriteOverlay from '../button/ButtonFavoriteOverlay';
-import ToolTip from '../tooltip/ToolTip';
+import Card from '../../card/Card';
+import HoverCard from '../../card/HoverCard';
+import ButtonBar from '../../button/ButtonBar';
+import ButtonUnfavorite from '../../button/ButtonUnfavorite';
+import ButtonFavorite from '../../button/ButtonFavorite';
+import ButtonDelete from '../../button/ButtonDelete';
+import ButtonEdit from '../../button/ButtonEdit';
+import ButtonFavoriteOverlay from '../../button/ButtonFavoriteOverlay';
+import ToolTip from '../../tooltip/ToolTip';
 
 import './ModuleItem.scss';
 
@@ -26,6 +26,8 @@ function ModuleItem({ module, handlers }) {
 
     const handleDelete = () => handlers.handleDelete(module.ModuleID);
 
+    const handleModuleClick = () => handlers.handleModuleClick(module.ModuleID);
+
     // View ----------------------------------------
     return (
         <HoverCard>
@@ -37,10 +39,10 @@ function ModuleItem({ module, handlers }) {
                         </ToolTip>
                 }
                 <div className='item'>
-                    <div className='image'>
+                    <div className='image' onClick={handleModuleClick}>
                         <img src={module.ModuleImageURL} alt={module.ModuleName} />
                     </div>
-                    <div className='content'>
+                    <div className='content' onClick={handleModuleClick}>
                         <h2>{module.ModuleName} ({module.ModuleCode})</h2>
                         <h3>Level {module.ModuleLevel}</h3>
                     </div>
