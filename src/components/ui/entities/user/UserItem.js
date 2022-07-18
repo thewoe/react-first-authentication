@@ -24,7 +24,7 @@ function UserItem({ user, handlers }) {
     return (
         <HoverCard>
             <Card>
-                <div className='item'>
+                <div className='listview'>
                     <div className='image'>
                         <img src={user.UserImageURL} alt={`${user.UserLastname}, ${user.UserFirstname}`} />
                     </div>

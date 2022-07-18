@@ -15,7 +15,7 @@ function ModuleList({ modules, handlers }) {
     return (
         <>
             <div className='info'>
-                <h3>{`Displaying ${modules.length} Modules`}</h3>
+                <h3 className='resultsheading'>{`Displaying ${modules.length} Modules`}</h3>
             </div>
             <div className='list'>
                 {

@@ -15,7 +15,7 @@ function UserList({ users, handlers }) {
     return (
         <>
             <div className='info'>
-                <h3>{`Displaying ${users.length} Users`}</h3>
+                <h3 className='resultsheading'>{`Displaying ${users.length} Users`}</h3>
             </div>
             <div className='list'>
                 {

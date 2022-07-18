@@ -1,5 +1,8 @@
-div.item {
-  display: flex;
+@import "../../../../variables";
+@import "../../../../mixins";
+
+div.listview {
+  @include flexCenter(row);
   width: 850px;
   height: 100px;
 
@@ -20,19 +23,37 @@ div.item {
       width: 100%;
       padding: 10px;
     
-      & > h2 { font-size: inherit; }
-      & > h3 { 
-        font-size: 80%;
-        color: Grey; 
+      & > h2 { 
+        font-size: $moduleItemSubheaderTextSize;
+        color: $standardTextColour;
       }
+
+      & > h3 { 
+        font-size: $moduleItemSubsubheaderTextSize;
+        color: $subsubheaderTextColour;
+      }
+
       & > h4 { 
-        font-size: 70%;
-        color: Grey; 
+        font-size: $moduleItemSubsubsubheaderTextSize;
+        color: $subsubheaderTextColour;
       }
     }
 
-    & > .modulebuttons {
-      padding-right: 50px;
-      padding-top: 25px;
+  & > .modulebuttons {
+    padding-right: 50px;
+
+    & button {
+      font: inherit;
+      cursor: pointer;
+      border: 1px solid $moduleCardButtonBorderColour;
+      background-color: transparent;
+      height: 30px;
+      padding: 5px;
+      border-radius: 4px;
+
+      &:hover, :active {
+        background-color: $moduleCardButtonHoverColour;
+      }
     }
   }
+}
