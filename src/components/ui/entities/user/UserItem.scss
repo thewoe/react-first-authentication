@@ -1,16 +1,11 @@
-/* -------------------------------------------- */
-/* Styling //////////////////////////////////// */
-/* -------------------------------------------- */
-
 div.item {
   display: flex;
-  font-size: 90%;
-  width: 400px;
+  width: 850px;
+  height: 100px;
 
-  // Image section
   & > .image {
-    width: 130px;
-    height: 130px;
+    width: 150px;
+    height: 100%;
     border-radius: 5px 0px 0px 5px;
 
     & > img {
@@ -27,14 +22,17 @@ div.item {
     
       & > h2 { font-size: inherit; }
       & > h3 { 
+        font-size: 80%;
         color: Grey; 
-        &.cardAttribute::after { content: " "; }
+      }
+      & > h4 { 
+        font-size: 70%;
+        color: Grey; 
       }
     }
 
-    // Actions section
     & > .modulebuttons {
-      float: right;
-      padding-right: 10px;
+      padding-right: 50px;
+      padding-top: 25px;
     }
   }

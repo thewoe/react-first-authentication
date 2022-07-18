@@ -31,7 +31,7 @@ function UserItem({ user, handlers }) {
                     <div className='content'>
                         <h2>{`${user.UserFirstname} ${user.UserLastname}`}</h2>
                         <h3>{`Level ${user.UserLevel}`}</h3>
-                        <h3>{user.UserEmail}</h3>
+                        <h4>{user.UserEmail}</h4>
                     </div>
                     <div className='modulebuttons'>
                         <ButtonBar className='cardbar'>
