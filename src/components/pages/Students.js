@@ -123,7 +123,7 @@ function Students() {
 
     const initialiseOutcomeModal = (type, outcome) => {
         createModal(
-            outcome.success ? `User Successfully ${type}ed` : `Error ${type}ing User`,
+            outcome.success ? `User successfully ${type}ed` : `Error ${type}ing user`,
             outcome.success ? `Your user has been successfully ${type}ed`
                 : `There was an error in ${type}ing your user, due to ${outcome}. Please try again later or contact technical support`,
             [

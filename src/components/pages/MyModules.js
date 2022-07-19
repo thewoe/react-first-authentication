@@ -140,7 +140,7 @@ function MyModules() {
 
     const initialiseOutcomeModal = (type, outcome) => {
         createModal(
-            outcome.success ? `Module Successfully ${type}ed` : `Error ${type}ing Module`,
+            outcome.success ? `Module successfully ${type}ed` : `Error ${type}ing module`,
             outcome.success ? `Your module has been successfully ${type}ed`
                 : `There was an error in ${type}ing your module, due to ${outcome}. Please try again later or contact technical support`,
             [
