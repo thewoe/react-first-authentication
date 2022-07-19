@@ -44,13 +44,26 @@ function Students() {
         else setLoadingMessage(`Error ${outcome.response.status}: Users could not be found.`);
     }
 
+    const postUser = async newUser => {
+        const outcome = await apiRequest(API_URL, 'Users', API_KEY, 'POST', newUser);
+        initialiseOutcomeModal('add', outcome);
+        setModalVisibility(true);
+    }
+
     const onSubmit = newUser => {
-        newUser.UserID = users.length+1;
         setUsers([...users, newUser]);
+        postUser(newUser);
         handleCancel();
     }
 
+    const putUser = async editUser => {
+        const outcome = await apiRequest(API_URL, `Users/${editUser.UserID}`, API_KEY, 'PUT', editUser);
+        initialiseOutcomeModal('edit', outcome);
+        setModalVisibility(true);
+    }
+
     const onEdit = editUser => {
+        putUser(editUser);
         const editUserID = users.findIndex(user => user.UserID === editUser.UserID);
         setUsers(users.map((user, index) => index === editUserID ? editUser : user));
         handleCancel();
@@ -61,7 +74,14 @@ function Students() {
         setModalVisibility(true);
     }
 
+    const deleteUser = async id => {
+        const outcome = await apiRequest(API_URL, `Users/${id}`, API_KEY, 'DELETE');
+        initialiseOutcomeModal('delet', outcome);
+        setModalVisibility(true);
+    }
+
     const handleDelete = id => {
+        deleteUser(id);
         setUsers(users.filter((user) => user.UserID !== id));
         handleCancel();
     };
@@ -96,6 +116,19 @@ function Students() {
                 </ToolTip>,
                 <ToolTip text='Click to retain user'>
                     <ButtonNo hasTitle onClick={handleCancel} />
+                </ToolTip>
+            ]
+        );
+    };
+
+    const initialiseOutcomeModal = (type, outcome) => {
+        createModal(
+            outcome.success ? `User Successfully ${type}ed` : `Error ${type}ing User`,
+            outcome.success ? `Your user has been successfully ${type}ed`
+                : `There was an error in ${type}ing your user, due to ${outcome}. Please try again later or contact technical support`,
+            [
+                <ToolTip text='Click to close this message'>
+                    <ButtonYes hasTitle title='OK' onClick={handleCancel} />
                 </ToolTip>
             ]
         );
