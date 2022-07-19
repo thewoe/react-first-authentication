@@ -18,8 +18,6 @@ import './MyModules.scss';
 
 function MyModules() {
     // Properties ----------------------------------
-    const API_URL = 'https://my.api.mockaroo.com/';
-    const API_KEY = '?key=bb6adbc0';
     const navigate = useNavigate();
     var modalNumber = 0;
 
@@ -37,7 +35,7 @@ function MyModules() {
 
     // Methods -------------------------------------
     const fetchModules = async () => {
-        const outcome = await apiRequest(API_URL, 'Modules', API_KEY);
+        const outcome = await apiRequest('Modules');
         if (outcome.success) setModules (outcome.response);
         else setLoadingMessage(`Error ${outcome.response.status}: Modules could not be found.`);
     }
@@ -50,7 +48,7 @@ function MyModules() {
     const handleShowFavorites = () => setModules(modules.filter((module) => module.isFavorite));
 
     const postModule = async newModule => {
-        const outcome = await apiRequest(API_URL, 'Modules', API_KEY, 'POST', newModule);
+        const outcome = await apiRequest('Modules', 'POST', newModule);
         initialiseOutcomeModal('add', outcome);
         setModalVisibility(true);
     }
@@ -62,7 +60,7 @@ function MyModules() {
     }
 
     const putModule = async editModule => {
-        const outcome = await apiRequest(API_URL, `Modules/${editModule.ModuleID}`, API_KEY, 'PUT', editModule);
+        const outcome = await apiRequest(`Modules/${editModule.ModuleID}`, 'PUT', editModule);
         initialiseOutcomeModal('edit', outcome);
         setModalVisibility(true);
     }
@@ -92,7 +90,7 @@ function MyModules() {
     );
 
     const deleteModule = async id => {
-        const outcome = await apiRequest(API_URL, `Modules/${id}`, API_KEY, 'DELETE');
+        const outcome = await apiRequest(`Modules/${id}`, 'DELETE');
         initialiseOutcomeModal('delet', outcome);
         setModalVisibility(true);
     }

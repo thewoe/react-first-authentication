@@ -18,8 +18,6 @@ import './Students.scss';
 
 function Students() {
     // Properties ----------------------------------
-    const API_URL = 'https://my.api.mockaroo.com/';
-    const API_KEY = '?key=bb6adbc0';
     var modalNumber = 0;
 
     // Hooks ---------------------------------------
@@ -36,7 +34,7 @@ function Students() {
 
     // Methods -------------------------------------
     const fetchUsers = async () => {
-        const outcome = await apiRequest(API_URL, 'Users', API_KEY);
+        const outcome = await apiRequest('Users');
         if (outcome.success) {
             setUsers (outcome.response);
             return outcome.response;
@@ -45,7 +43,7 @@ function Students() {
     }
 
     const postUser = async newUser => {
-        const outcome = await apiRequest(API_URL, 'Users', API_KEY, 'POST', newUser);
+        const outcome = await apiRequest('Users', 'POST', newUser);
         initialiseOutcomeModal('add', outcome);
         setModalVisibility(true);
     }
@@ -57,7 +55,7 @@ function Students() {
     }
 
     const putUser = async editUser => {
-        const outcome = await apiRequest(API_URL, `Users/${editUser.UserID}`, API_KEY, 'PUT', editUser);
+        const outcome = await apiRequest(`Users/${editUser.UserID}`, 'PUT', editUser);
         initialiseOutcomeModal('edit', outcome);
         setModalVisibility(true);
     }
@@ -75,7 +73,7 @@ function Students() {
     }
 
     const deleteUser = async id => {
-        const outcome = await apiRequest(API_URL, `Users/${id}`, API_KEY, 'DELETE');
+        const outcome = await apiRequest(`Users/${id}`, 'DELETE');
         initialiseOutcomeModal('delet', outcome);
         setModalVisibility(true);
     }

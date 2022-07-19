@@ -11,9 +11,6 @@ import '../../form/FormInput.scss';
 
 function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
     // Properties ----------------------------------
-    const API_URL = 'https://my.api.mockaroo.com/';
-    const API_KEY = '?key=bb6adbc0';
-
     if (!existingModule) existingModule = { ModuleName: "", ModuleCode: "", ModuleLevel: 3, ModuleLeaderID: 0, ModuleImageURL: "" };
 
     // Hooks ---------------------------------------
@@ -28,7 +25,7 @@ function ModuleForm({ onSubmit, onCancel, existingModule=null }) {
 
     // Methods -------------------------------------
     const fetchUsers = async () => {
-        const outcome = await apiRequest(API_URL, 'Users', API_KEY);
+        const outcome = await apiRequest('Users');
         if (outcome.success) setUsers (outcome.response);
         else setLoadingMessage(`Error ${outcome.response.status}: Users could not be found.`);
     }
