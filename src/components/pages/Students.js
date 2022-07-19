@@ -49,8 +49,7 @@ function Students() {
     }
 
     const onSubmit = newUser => {
-        setUsers([...users, newUser]);
-        postUser(newUser);
+        postUser(newUser).then(() => fetchUsers());
         handleCancel();
     }
 
@@ -61,9 +60,7 @@ function Students() {
     }
 
     const onEdit = editUser => {
-        putUser(editUser);
-        const editUserID = users.findIndex(user => user.UserID === editUser.UserID);
-        setUsers(users.map((user, index) => index === editUserID ? editUser : user));
+        putUser(editUser).then(() => fetchUsers());
         handleCancel();
     }
 
@@ -79,8 +76,7 @@ function Students() {
     }
 
     const handleDelete = id => {
-        deleteUser(id);
-        setUsers(users.filter((user) => user.UserID !== id));
+        deleteUser(id).then(() => fetchUsers());
         handleCancel();
     };
 

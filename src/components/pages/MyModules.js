@@ -54,8 +54,7 @@ function MyModules() {
     }
 
     const onSubmit = newModule => {
-        setModules([...modules, newModule]);
-        postModule(newModule);
+        postModule(newModule).then(() => fetchModules());
         handleCancel();
     }
 
@@ -66,9 +65,7 @@ function MyModules() {
     }
 
     const onEdit = editModule => {
-        putModule(editModule);
-        const editModuleID = modules.findIndex(module => module.ModuleID === editModule.ModuleID);
-        setModules(modules.map((module, index) => index === editModuleID ? editModule : module));
+        putModule(editModule).then(() => fetchModules());
         handleCancel();
     }
 
@@ -96,8 +93,7 @@ function MyModules() {
     }
 
     const handleDelete = id => {
-        deleteModule(id);
-        setModules(modules.filter((module) => module.ModuleID !== id));
+        deleteModule(id).then(() => fetchModules());
         handleCancel();
     };
 
