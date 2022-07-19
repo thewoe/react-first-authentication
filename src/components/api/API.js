@@ -6,14 +6,23 @@
 // body: defaults to null if not specified. (Use this later when you want to update records.)
 // -----------------------------------------------------------------------
 
-export async function apiRequest(apiURL, endpoint, key, method = "GET", body = null) {
-    // Build fetch parameters
-    let requestObj = { method: method }; // *GET, POST, PUT, DELETE, etc.
-    if (body) requestObj = {...requestObj, body: body};
-    // Call API and return response object
+export const apiRequest = async (apiURL, endpoint, key, method="GET", body=null) => {
+  // Build request object
+  let requestObj = { method: method }; // *GET, POST, PUT, DELETE, etc.
+  if (body) requestObj = {
+    ...requestObj,
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify(body)
+  };
+  // Call API and return response object
+  try {
     const endpointAddress = apiURL + endpoint + key;
     const response = await fetch(endpointAddress, requestObj);
-    if ((response.status >= 200) && (response.status <= 299)) 
-         return {success: true, response: await response.json()};
-    else return {success: false, response: response};
+    if ((response.status >= 200) && (response.status <= 299))
+      return { success: true, response: await response.json() };
+    else return { success: false, response: response };
+  }
+  catch (error) {
+    return { success: false, response: error };
+  }
 }

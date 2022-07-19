@@ -49,13 +49,26 @@ function MyModules() {
 
     const handleShowFavorites = () => setModules(modules.filter((module) => module.isFavorite));
 
+    const postModule = async newModule => {
+        const outcome = await apiRequest(API_URL, 'Modules', API_KEY, 'POST', newModule);
+        initialiseOutcomeModal('add', outcome);
+        setModalVisibility(true);
+    }
+
     const onSubmit = newModule => {
-        newModule.ModuleID = modules.length+1;
         setModules([...modules, newModule]);
+        postModule(newModule);
         handleCancel();
     }
 
+    const putModule = async editModule => {
+        const outcome = await apiRequest(API_URL, `Modules/${editModule.ModuleID}`, API_KEY, 'PUT', editModule);
+        initialiseOutcomeModal('edit', outcome);
+        setModalVisibility(true);
+    }
+
     const onEdit = editModule => {
+        putModule(editModule);
         const editModuleID = modules.findIndex(module => module.ModuleID === editModule.ModuleID);
         setModules(modules.map((module, index) => index === editModuleID ? editModule : module));
         handleCancel();
@@ -78,7 +91,14 @@ function MyModules() {
         ))
     );
 
+    const deleteModule = async id => {
+        const outcome = await apiRequest(API_URL, `Modules/${id}`, API_KEY, 'DELETE');
+        initialiseOutcomeModal('delet', outcome);
+        setModalVisibility(true);
+    }
+
     const handleDelete = id => {
+        deleteModule(id);
         setModules(modules.filter((module) => module.ModuleID !== id));
         handleCancel();
     };
@@ -113,6 +133,19 @@ function MyModules() {
                 </ToolTip>,
                 <ToolTip text='Click to retain module'>
                     <ButtonNo hasTitle onClick={handleCancel} />
+                </ToolTip>
+            ]
+        );
+    };
+
+    const initialiseOutcomeModal = (type, outcome) => {
+        createModal(
+            outcome.success ? `Module Successfully ${type}ed` : `Error ${type}ing Module`,
+            outcome.success ? `Your module has been successfully ${type}ed`
+                : `There was an error in ${type}ing your module, due to ${outcome}. Please try again later or contact technical support`,
+            [
+                <ToolTip text='Click to close this message'>
+                    <ButtonYes hasTitle title='OK' onClick={handleCancel} />
                 </ToolTip>
             ]
         );

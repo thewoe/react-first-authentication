@@ -1,7 +1,7 @@
 import Button from './Button';
 import IconCheckmark from '../icon/IconCheckmark';
 
-function ButtonYes({ onClick, hasTitle=false }) {
+function ButtonYes({ onClick, hasTitle=false, title='Yes' }) {
     // Properties ----------------------------------
 
     // Hooks ---------------------------------------
@@ -12,7 +12,7 @@ function ButtonYes({ onClick, hasTitle=false }) {
 
     // View ----------------------------------------
     return (
-        <Button onClick={onClick} hasTitle={hasTitle} title='Yes'>
+        <Button onClick={onClick} hasTitle={hasTitle} title={title}>
             <IconCheckmark />
         </Button>
     );
